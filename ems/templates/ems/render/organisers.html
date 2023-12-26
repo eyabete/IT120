@@ -1,0 +1,47 @@
+{% extends 'ems/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container users-section">
+    <br>
+    <h4 class="teal-text text-darken-3">Organisers <i class="material-icons">business</i></h4>
+    <hr>
+    <br>
+    <div class="row">
+        
+        <div class="row center">
+            <a href="{% url 'add_organiser' %}" class="btn btn-large teal">Add Organiser</a>
+        </div>
+        <div class="col m6">
+            <ul class="collection">
+                {% for organiser in organisers1 %}
+                <li class="collection-item avatar z-depth-1">
+                    <span class="title"><strong>{{ organiser.name }}</strong></span>
+                    <p><br><span class="teal-text text-darken-2">Location: </span>{{ organiser.location }}<br>
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">business</i></a>
+                </li>
+                <br>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col m6">
+            <ul class="collection">
+                {% for organiser in organisers2 %}
+                <li class="collection-item avatar z-depth-1">
+                    <span class="title"><strong>{{ organiser.name }}</strong></span>
+                    <p><br><span class="teal-text text-darken-2">Location: </span>{{ organiser.location }}<br>
+                        <br><span class="teal-text text-darken-2">Events Conducted:</span>4
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">business</i></a>
+                </li>
+                <br>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <br>
+</div>
+
+{% endblock %}

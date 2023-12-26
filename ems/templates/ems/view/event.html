@@ -1,0 +1,99 @@
+{% extends 'ems/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<script>
+    var csrftoken = "{{ csrf_token }}";
+</script>
+
+
+<div class="container">
+    <div class="row center">
+        <br><br>
+        <h3 class="teal-text text-darken-2">{{ event.name }}</h3>
+        <br>
+        <hr>
+        <br>
+        <p>{{ event.description }}</p>
+        <br><br>
+        <h4 class="teal-text text-darken-2">Event Details</h4>
+        <br>
+        <h5><span class="teal-text text-darken-2">Date: </span>{{ event.event_date }}</h5>
+        <br><br>
+        <div class="col m12">
+            <div class="card teal darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title">Organiser: {{ event.organiser }}</span>
+                  <p><br>About: {{ event.organiser.about }}</p>
+                  <p>Location: {{ event.organiser.location }}</p>
+                </div>
+                <div class="card-action">
+                  <a href="{% url 'organisers' %}" class="btn white teal-text text-darken-2">Know More!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col m6">
+            <div class="card white darken-1">
+                    <div id="successModal" class="modal">
+                <div class="modal-content">
+                    <h4>You successfully registered!</h4>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
+            </div>
+            
+    </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row center">
+       <a href="#" class="btn btn-large" id="registerButton" data-event-id="{{ event.id }}">Register Now!</a>
+
+    </div>
+    <br><br>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var registerButton = document.getElementById('registerButton');
+        var successModal = document.getElementById('successModal');
+
+        // Function to show the success modal
+        function showSuccessModal() {
+            var instance = M.Modal.init(successModal);
+            instance.open();
+        }
+
+        // Event listener for the Register Now button
+         registerButton.addEventListener('click', function() {
+            var eventId = registerButton.getAttribute('data-event-id');
+
+            // Make an AJAX request to the registration view
+            fetch('/register_for_event/' + eventId + '/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken, // Make sure to include the CSRF token
+                },
+                credentials: 'same-origin', // Include credentials to send cookies
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response:', data); 
+                if (data.success) {
+                    // Show the success modal
+                    showSuccessModal();
+                } else {
+                    // Handle registration failure (e.g., user is already registered)
+                    console.error(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Not Authorized</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row center">
+            <br><br><br><br>
+            <div class="col m8 offset-m2">
+                <div class="card">
+                    <div class="card-body teal white-text">
+                        <br>
+                        <h2>How do you want to register?</h2>
+                        <br>
+                        <p>Register as an organizer/participant</p>
+                        <a href="{% url 'register_participant' %}" class="btn btn-large white teal-text">Participant</a>
+                        <a href="{% url 'register_organiser' %}" class="btn btn-large white teal-text">Organizer</a>
+                        <br><br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

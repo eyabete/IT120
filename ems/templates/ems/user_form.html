@@ -1,0 +1,56 @@
+{% extends 'ems/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row teal-text text-darken-3 center">
+        <h3>Edit your profile (Participant)</h3>
+    </div>
+    <br>
+    <div class="row" style="margin-bottom: 100px;">
+        <div class="col m6 offset-m3">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="input-field">
+                    {{form.name}}
+                    <label for="id_name">Name:</label>
+                </div>
+                <br>
+                <div class="input-field">
+                    {{form.dob}}
+                    <label for="id_dob">DOB:</label>
+                </div>
+                <br>
+                <div class="input-field">
+                    {{form.gender}}
+                    <label for="id_gender">Gender:</label>
+                    <br><br><br>
+                </div>
+                <div class="input-field center">
+                    {{ form.profile_pic }}
+                    <br><br><br>
+                </div>
+                <div class="row center">
+                    <button type="submit" class="btn btn-large" id="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
+    dob = document.getElementById('id_dob')
+    dob.classList.add('datepicker')
+    $(document).ready(function(){
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    });
+    console.log(dob)
+</script>
+
+{% endblock %}

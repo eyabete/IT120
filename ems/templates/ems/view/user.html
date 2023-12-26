@@ -1,0 +1,26 @@
+{% extends 'ems/main.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col m3">
+            <br><br>
+            <img src="{{ participant.profile_pic.url }}" alt="{{ participant.name }}" width="530px" height="530px">
+            <br><br>
+        </div>
+        <div class="col m5 offset-m4 teal-text text-darken-3">
+            <h3 class="center black-text">{{ participant.name }}</h3>
+            <br>
+            <h5>Age: <span class="black-text">{{ age }}</span></h5>
+            <br>
+            <h5>Username: <span class="black-text">{{ participant.user }}</span></h5>
+            <br>
+            <h5>Email: <span class="black-text">{{ participant.user.email }}</span></h5>
+            <br>
+            <h5>Events Participated: <span class="black-text">{{ events_participated }}</span></h5>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

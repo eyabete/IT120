@@ -1,0 +1,12 @@
+.form-section {
+    margin: 15px auto;
+}
+
+
+.form-section h5 {
+    margin: 10px ;
+    padding-bottom: 10px;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 26px;
+}

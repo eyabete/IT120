@@ -1,0 +1,46 @@
+{% extends 'ems/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container users-section">
+    <br>
+    <h4 class="teal-text text-darken-3">Meet your Fellow Participants <i class="material-icons">people</i></h4>
+    <hr>
+    <br>
+    <div class="row">
+        <div class="col m6">
+            <ul class="collection">
+                {% for participant in participants1 %}
+                <li class="collection-item avatar z-depth-1">
+                    <img src="{{ participant.profile_pic.url }}" alt="" class="circle">
+                    <span class="title"><strong>{{ participant.name }}</strong></span>
+                    <p><br><span class="teal-text text-darken-2">Gender: </span>{{ participant.gender }}<br><br>
+                        <span class="teal-text text-darken-2">Date of Birth: </span>{{ participant.dob }}
+                    </p>
+                    <a href="{% url 'user' participant.id %}" class="secondary-content"><i class="material-icons">people</i></a>
+                </li>
+                <br>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col m6">
+            <ul class="collection">
+                {% for participant in participants2 %}
+                <li class="collection-item avatar z-depth-1">
+                    <img src="{{ participant.profile_pic.url }}" alt="" class="circle">
+                    <span class="title"><strong>{{ participant.name }}</strong></span>
+                    <p><br><span class="teal-text text-darken-2">Gender: </span>{{ participant.gender }}<br><br>
+                        <span class="teal-text text-darken-2">Date of Birth: </span>{{ participant.dob }}
+                    </p>
+                    <a href="{% url 'user' participant.id %}" class="secondary-content"><i class="material-icons">people</i></a>
+                </li>
+                <br>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <br>
+</div>
+
+{% endblock %}

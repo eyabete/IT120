@@ -1,0 +1,53 @@
+{% extends 'ems/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+
+    <div class="about row center">
+        <h3 class="center teal-text text-darken-4">RVR Events</h3>
+        <h5 class="center teal-text text-darken-4">One Stop For All Your Events!</h5>
+        <br>
+        <div class="row">
+            <div class="col m6">
+                <img src="{% static 'img/event_1.png' %}" alt="Event Image" width="100%">
+            </div>
+            <div class="col m6">
+                <p class="about-text">Customers and organizers often run into trouble while looking for a platform that intends on providing one stop solution for all types of event- related activities (organize, promote and execute events in a simple, hassle-free way). This platform is designed to serve as a solution.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+
+<div class="about events">
+    <div class="container">
+        <h3 class="center teal-text text-darken-4">EVENTS</h3>
+        <br>
+        <div class="row">
+            {% for event in all_events %}
+            <div class="col m4">
+                <div class="card white">
+                    <div class="card-content teal-text text-darken-3 center">
+                        <span class="card-title">{{ event.name }}</span>
+                    </div>   
+                    <div class="card-action">
+                        <a href="#" class="teal-text">{{ event.event_date }}</a>
+                        <span class="white-text">VIEW: </span><a href="{% url 'view_event' event.id %}" class="btn-floating waves-effect white">
+                            <i class="material-icons teal darken-3">launch</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+        <br>
+        <div class="button-div center">
+            <a href="#" class="btn teal btn-large">View all</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

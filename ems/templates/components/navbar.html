@@ -1,0 +1,43 @@
+{% load auth_extras %}
+{% if request.user != None %}
+<ul id="dropdown1" class="dropdown-content text-darken-4">
+    {% if request.user|has_group:"participant" %}
+    <li><a href="{% url 'edit_profile_participant' request.user.participant.id %}">Edit Profile</a></li>
+    {% endif %}
+    {% if request.user|has_group:"organiser" %}
+    <li><a href="{% url 'edit_profile_organiser' request.user.organiser.id %}">Edit Profile</a></li>
+    {% endif %}
+    <li class="divider"></li>
+    <li><a href="{% url 'logout' %}">Logout</a></li>
+</ul>
+{% endif %}
+<ul id="dropdown2" class="dropdown-content text-darken-4">
+    <li><a href="{% url 'transactions' %}">Transactions</a></li>
+    <li><a href="{% url 'shippers' %}">Shippers</a></li>
+    <li><a href="{% url 'registrations' %}">Registrations</a></li>
+    <li><a href="{% url 'shipments' %}">Shipments</a></li>
+</ul>
+<nav class="teal darken-2">
+    <div class="container">
+        <div class="nav-wrapper">
+            <a href="{% url 'home' %}" class="brand-logo">RVREvents {% if request.user.is_staff %}(Admin){% endif %}</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="{% url 'events' %}">Events</a></li>
+                <li><a href="{% url 'organisers' %}">Organizers</a></li>
+                <li><a href="{% url 'participants' %}">Community</a></li>
+                {% comment %} <li><a href="{% url 'my_events' %}">My Events</a></li> {% endcomment %}
+                {% if request.user|has_group:"participant" %}
+                    <li><a href="{% url 'my_events' %}">My Events</a></li>
+                {% endif %}
+                {% if request.user.username %}
+                    <li><a class="dropdown-trigger" href="#" data-target="dropdown1">Hello {{request.user.username}}<i class="material-icons right">arrow_drop_down</i></a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+                {% if request.user|has_group:"participant" %}
+                    <img src="{{ request.user.participant.profile_pic.url }}" alt="" width="40px" height="40px" style="padding-top: 10px;" class="responsive-img circle">
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

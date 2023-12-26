@@ -1,0 +1,44 @@
+{% extends 'ems/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row teal-text text-darken-3 center">
+        <h3>Edit your profile (Organizer)</h3>
+    </div>
+    <br>
+    <div class="row" style="margin-bottom: 100px;">
+        <div class="col m6 offset-m3">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="input-field">
+                    {{form.name}}
+                    <label for="id_name">Name:</label>
+                </div>
+                <br>
+                <div class="input-field">
+                    {{form.about}}
+                    <label for="id_about">About:</label>
+                </div>
+                <br>
+                <div class="input-field">
+                    {{form.location}}
+                    <label for="id_location">Location:</label>
+                    <br><br><br>
+                </div>
+                <div class="row center">
+                    <button type="submit" class="btn btn-large">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
+</script>
+
+{% endblock %}

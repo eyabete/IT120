@@ -1,0 +1,59 @@
+{% extends 'ems/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+     .col-divider {
+        position: relative;
+    }
+    .col-divider::after {
+        content: "";
+        display: block;
+        width: 2px; /* Adjust the width of the line as needed */
+        height: 100%;
+        background-color:#008080; /* Adjust the color of the line as needed */
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+</style>
+
+
+<div class="container">
+    <h3 class="teal-text text-darken-2">My Events</h3>
+    <hr>
+    <br>
+    
+    
+    {% if upcoming_events %}
+        <div class="row">
+            <div class="col s6 col-divider">
+                <h5 class="center-align">Upcoming Events</h5>
+                <h6 class="teal-text text-darken-2 center-align">Don't forget your upcoming events!</h6>
+                <hr>
+                <ul>
+                    {% for registration in upcoming_events %}
+                        <li>{{ registration.event.name }} - {{ registration.event.event_date }}</li>
+                        <hr>  
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col s6">
+                <h5 class="center-align"> Done Events</h5>
+                <h6 class="teal-text text-darken-2 center-align">Here are the events you have attended!</h6>
+                <hr>
+                <ul>
+                    {% for registration in done_events %}
+                        <li>{{ registration.event.name }} - {{ registration.event.event_date }}</li>
+                        <hr>  
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% else %}
+        <p>You haven't registered for any upcoming events yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

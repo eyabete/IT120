@@ -1,0 +1,49 @@
+{% extends 'ems/main.html' %}
+{% load static %}
+{% load auth_extras %}
+{% block content %}
+
+<div class="container users-section">
+    <br>
+    <h4 class="teal-text text-darken-3">Events <i class="material-icons">event</i></h4>
+    <hr>
+    <br>
+    <div class="row">
+        {% if request.user|has_group:"organiser" %}
+        <div class="row center">
+            <a href="{% url 'create_event' request.user.organiser.id %}" class="btn btn-large teal">Create Event</a>
+        </div>
+        {% endif %}
+        <div class="col m6">
+            <ul class="collection">
+                {% for event in events1 %}
+                <li class="collection-item avatar z-depth-1">
+                    <span class="title"><strong>{{ event.name }}</strong></span>
+                    <p><br><span class="teal-text text-darken-2">Organiser: </span>{{ event.organiser }}<br>
+                        <br><span class="teal-text text-darken-2">Event date: </span>{{ event.event_date }}
+                    </p>
+                    <a href="{% url 'view_event' event.id %}" class="secondary-content"><i class="material-icons">event</i></a>
+                </li>
+                <br>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col m6">
+            <ul class="collection">
+                {% for event in events2 %}
+                <li class="collection-item avatar z-depth-1">
+                    <span class="title"><strong>{{ event.name }}</strong></span>
+                    <p><br><span class="teal-text text-darken-2">Organiser: </span>{{ event.organiser }}<br>
+                        <br><span class="teal-text text-darken-2">Event date: </span>{{ event.event_date }}
+                    </p>
+                    <a href="{% url 'view_event' event.id %}" class="secondary-content"><i class="material-icons">event</i></a>
+                </li>
+                <br>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <br>
+</div>
+
+{% endblock %}
