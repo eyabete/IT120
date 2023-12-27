@@ -73,3 +73,7 @@ class ShipmentForm(ModelForm):
     class Meta:
         model = Shipment
         fields = '__all__'
+
+class EventEvaluationForm(forms.Form):
+    comment = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}), required=True)
+    rating = forms.IntegerField(label='Rating', min_value=1, max_value=5)

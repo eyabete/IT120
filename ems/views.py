@@ -1,5 +1,5 @@
 from ems.decorators import allowed_users
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -436,3 +436,45 @@ def my_events(request):
     }
 
     return render(request, 'ems/render/my_events.html', context)
+
+
+@login_required(login_url='login')
+def evaluate_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    user = request.user
+
+    if request.method == 'POST':
+        form = EventEvaluationForm(request.POST)
+        if form.is_valid():
+            comment = form.cleaned_data['comment']
+            rating = form.cleaned_data['rating']
+
+            # Check if the user has already evaluated this event
+            existing_evaluation = EventEvaluation.objects.filter(event=event, user=user).first()
+
+            if existing_evaluation:
+                # Update existing evaluation
+                existing_evaluation.comment = comment
+                existing_evaluation.rating = rating
+                existing_evaluation.save()
+            else:
+                # Create a new evaluation
+                EventEvaluation.objects.create(event=event, user=user, comment=comment, rating=rating)
+
+            return redirect('ems/render/my_events.html')  # Redirect to wherever you want after evaluation
+
+    else:
+        form = EventEvaluationForm()
+
+    context = {
+        'event': event,
+        'form': form,
+    }
+
+    return render(request, 'ems/render/evaluate_event.html', context)
+
+
+def evaluations_list(request):
+    evaluations = EventEvaluation.objects.all()
+    context = {'evaluations': evaluations}
+    return render(request, 'ems/render/evaluations_list.html', context)
