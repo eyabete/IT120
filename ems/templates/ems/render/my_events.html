@@ -46,7 +46,6 @@
                 <ul>
                     {% for registration in done_events %}
                         <li>{{ registration.event.name }} - {{ registration.event.event_date }}</li>
-                        <a href="{% url 'evaluate_event' registration.event.id %}">Evaluate</a>
                         <hr>  
                     {% endfor %}
                 </ul>

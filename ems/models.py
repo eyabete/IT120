@@ -111,9 +111,3 @@ class Registration(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     reg_date = models.DateField(auto_now_add=True)
-    
-class EventEvaluation(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment = models.TextField()
-    rating = models.PositiveIntegerField(default=0, choices=[(i, i) for i in range(1, 5)])
