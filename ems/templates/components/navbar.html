@@ -25,9 +25,11 @@
                 <li><a href="{% url 'events' %}">Events</a></li>
                 <li><a href="{% url 'organisers' %}">Organizers</a></li>
                 <li><a href="{% url 'participants' %}">Community</a></li>
-                {% comment %} <li><a href="{% url 'my_events' %}">My Events</a></li> {% endcomment %}
                 {% if request.user|has_group:"participant" %}
                     <li><a href="{% url 'my_events' %}">My Events</a></li>
+                {% endif %}
+                {% if request.user|has_group:"organiser" %}
+                    <li><a href="{% url 'evaluations_list' %}">Evaluations</a></li>
                 {% endif %}
                 {% if request.user.username %}
                     <li><a class="dropdown-trigger" href="#" data-target="dropdown1">Hello {{request.user.username}}<i class="material-icons right">arrow_drop_down</i></a></li>

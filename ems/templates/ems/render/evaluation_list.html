@@ -1,0 +1,19 @@
+{% extends 'ems/main.html' %}
+{% block content %}
+<div class="container">
+    <h3 class="teal-text text-darken-2">Event Evaluations</h3>
+    <hr>
+    <br>
+    <ul>
+        {% for evaluation in evaluations %}
+            <li>
+                <strong>{{ evaluation.user.username }} - {{ evaluation.event.name }}</strong> 
+                <p>Rating: {{ evaluation.rating }}</p>
+                <p>Comment: {{ evaluation.comment }}</p>
+                <hr>
+                
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
